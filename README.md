@@ -84,3 +84,23 @@ LPIPS uses the [published perceptual metric implementation](https://github.com/r
 ## Reproduction logic conventions
 
 The boundary auxiliary term uses the differentiable local max-minus-min morphological band. Binary targets retain the same boundary band; soft predictions now provide gradients instead of a thresholded, nondifferentiable boundary indicator.
+
+## Selected compact grouping setting
+
+`config.json` fixes RGB 64-by-64 input, width 24, a 6-by-6 token grid, the four
+proximity/similarity/tangent/closure cues and intervention margin 0.02. The compact
+encoder is trained from scratch. Internal cue-removal interventions and the
+baseline/no_proximity/no_similarity/no_continuity/no_closure controls define the
+comparison; no pretrained Samba model or external occlusion generator is needed.
+
+```bash
+gestalt-grouping demo --output data/example.npz --config config.json --count 96
+gestalt-grouping prepare --input data/example.npz --output data/prepared
+gestalt-grouping train --input data/prepared --config config.json --output runs/compact --variant full --epochs 100 --seed 13
+gestalt-grouping evaluate --input data/prepared/test.npz --model runs/compact/model.pt --output runs/compact/evaluation
+```
+
+The included image/mask generator defines a complete finite segmentation setting.
+Independent real RGB images with aligned binary masks can replace it via the
+existing pack/schema interface. Additional real occlusion conditions are optional
+separate datasets, not a missing component of the selected cue-graph method.

@@ -1,5 +1,10 @@
 {
   "width": 24,
   "grid": 6,
-  "margin": 0.02
+  "margin": 0.02,
+  "input_shape": [
+    3,
+    64,
+    64
+  ]
 }

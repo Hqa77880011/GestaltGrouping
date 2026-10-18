@@ -42,4 +42,4 @@ class Model(nn.Module):
         return loss
 
 
-def demo(seed,n,c):return image_demo(seed,n)
+def demo(seed,n,c):return image_demo(seed,n,size=c.get('input_shape',[3,64,64])[-1])

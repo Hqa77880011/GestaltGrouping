@@ -80,3 +80,7 @@ python -m gestalt_grouping.evaluate_images --predictions runs/full/evaluation/pr
 ```
 
 LPIPS uses the [published perceptual metric implementation](https://github.com/richzhang/PerceptualSimilarity) with RGB values mapped to [-1,1]. Saliency endpoints use [PySODMetrics](https://github.com/lartpang/PySODMetrics) for adaptive/maximum F-measure, E-measure, S-measure, and weighted F-measure; their threshold conventions remain those of the metric package.
+
+## Reproduction logic conventions
+
+The boundary auxiliary term uses the differentiable local max-minus-min morphological band. Binary targets retain the same boundary band; soft predictions now provide gradients instead of a thresholded, nondifferentiable boundary indicator.

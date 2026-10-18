@@ -26,7 +26,7 @@ def region(p, y):
 
 
 def boundary(y, radius=3):
-    return (F.max_pool2d(y, 2*radius+1, 1, radius) + F.max_pool2d(-y, 2*radius+1, 1, radius) > 0).float()
+    return (F.max_pool2d(y, 2*radius+1, 1, radius) + F.max_pool2d(-y, 2*radius+1, 1, radius)).clamp(0, 1)
 
 
 def warp(x, flow):

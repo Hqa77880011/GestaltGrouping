@@ -14,7 +14,7 @@ Inspection environment: Python 3.13.5, NumPy 2.1.3, PyTorch 2.7.1+cu118, SciPy 1
 
 ## Data and preprocessing
 
-Generate synthetic shapes and binary saliency masks on the configured image grid.
+Generate uniform random RGB images with binary masks obtained by thresholding the first channel at 0.5.
 
 ```bash
 gestalt-grouping demo --output data/generated.npz --count 96 --config config.json --seed 13
